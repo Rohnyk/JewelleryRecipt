@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Card Recipt Entry</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="StyleSheet1.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="JavaScript1.js" type="text/javascript"></script>
+</head>
+<body>
+   <!--  -->
+    <div class="col-lg-10" id="mdiv">
+       <div class="col-lg-6" id="div1">
+    <form>
+       <table>
+        <tr>
+        <td>R.No:</td><td><input type="text" id="Rno"/></td>
+        <td>Date:</td><td><input id="sysdate" type="text" /></td>
+        </tr>
+        <tr>
+        <td>Staff:</td><td><select>
+                <option>Rohit</option>
+                <option>Chethan</option>
+                <option>Pavan</option>
+              </select></td>
+        </tr>
+        <tr>
+        <td>
+        Group ID:</td><td><input type="text" id="GID"/></td>
+        </tr>
+        <tr>
+        <td>
+        Group Name
+        </td>
+        <td style="text-align:center">Member No</td> 
+         </tr>
+        <tr>
+        <td> 
+        <select style="width:75px" id="groupnameid"> </select>
+        </td>
+        <td><input type="text"  readonly id="memberid"/>
+        </td>
+        </tr>
+        <tr>
+        <td>Amount:</td><td><input type="text" id="Amountid"/></td> 
+        </tr>
+        <tr>
+        <td>Amount (In Words):</td><td><input type="text"  readonly id="Amtw"/></td>
+        </tr>
+        <tr>
+        <td>Inst No.</td><td><input type="text" readonly id="instid"/></td>
+        </tr>
+        <tr>
+        <td>SGST:</td><td><input type="text" id="sgstid"/></td>
+        <td>CGST:</td><td><input type="text" id="cgstid"/></td>
+        </tr>
+        <tr>
+        <td>IGST:</td><td><input type="text id="igstid" /></td>
+        <td>Received:</td><td><input type="text" readonly id="recvid"/></td>
+        </tr>
+        <tr>
+        <td>Rate:</td><td><input type="text" /></td>
+        <td>Status:</td><td><input type="text" readonly value="Cash" class="statusid"/></td>
+        </tr>
+       </table>
+    </form>
+    </div>
+    <div class="col-lg-6" id="div2">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" readonly id="nameid"/></td>
+            </tr>
+            <tr>
+                 <td>Address:</td>
+                 <td><textarea rows="4" cols="25" readonly id="addrid"></textarea></td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                    <input type="text" readonly class="statusid" id="status2"/>
+                </td>
+            </tr>           
+            <tr>
+                <td id="td1">Narration:
+                </td>
+                <td id="td1"><input type="text" /></td>
+            </tr>
+
+        </table>
+    </div>
+    </div>
+    <div class="col-lg-2" id="bdiv">
+        <br />
+        <button id="addbut" class="glyphicon glyphicon-ok" > Add-Entry</button>
+        <br />
+        <button id="delbut" class="glyphicon glyphicon-remove"> Delete</button>
+        <br />
+        <button id="pribut" class="glyphicon glyphicon-print"> Print</button>
+        <br />
+        <button class="glyphicon glyphicon-log-out"> Exit</button>
+    </div>
+    <hr />
+    <div id="div3">
+        <table id="tdex" class="display" style="width:100%">
+        <thead>
+            <tr>
+                 <th>RNo</th>
+                <th>RDate</th>
+                <th>Installment</th>
+                <th>Amount</th>
+                <th>RSGST</th>
+                <th>RCGST</th>
+                <th>RIGST</th>
+                <th>Mode</th
+            </tr>
+        </thead>
+        <tbody id="ib">
+           
+        </tbody>
+    </table>
+    </div>
+ <script>
+     $(document).ready(function () {
+         var d = new Date();
+         var status = 2;
+         var month = d.getMonth() + 1;
+         var day = d.getDate();
+
+         var output = (day < 10 ? '0' : '') + day + '/' +
+             (month < 10 ? '0' : '') + month + '/' +d.getFullYear();
+             
+         $("#sysdate").val(output);
+         var instno = 0;
+         var date1 = new Object;
+         var date2 = new Object;
+         date1.getdate = output;
+         var table = $("#tdex").DataTable({
+             paging: false,
+             searching: false,
+             "bInfo" : false,
+             dom: 'lf<"#add"><"#add1">rtip',
+         });
+         $.ajax({
+             type: 'POST',
+             contentType: "application/json; charset=utf-8",
+             url: 'WebService1.asmx/reciptno',
+             data: JSON.stringify(date1),
+             datatype: 'json',
+             success: function (response) {
+                 console.log(response.d);
+                 if (response.d == '0' || response.d == '') {
+                     $('#Rno').val(1);
+                 }
+                 else {
+                     $('#Rno').val(parseInt(response.d)+1);
+                 }
+             },
+             error: function(err){
+                 console.log(JSON.stringify(err.d));
+             }
+         });
+         $("#GID").change(function () {
+             console.log("yes");
+             var ID = new Object;
+             var gid = $('#GID').val();
+             ID.gid = gid;
+             $.ajax({
+                 type: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 url: 'WebService1.asmx/exceldata',
+                 data: JSON.stringify(ID),
+                 datatype: 'json',
+                 success: function (response) {
+                     if (response.d != 'No R.No')
+                     {
+                         var data = JSON.parse(response.d);
+                         $('#nameid').val(data["Name"]);
+                         $('#memberid').val(data["Member_No"]);
+                         $('#groupnameid').html("");
+                         $('<option>'+data["GroupName"]+"</option>").appendTo("#groupnameid");
+                         $('#Amountid').val(1000);
+                         var ID2 = new Object;
+                         ID2.gid = $('#GID').val();
+                         ID2.getdate = output;
+                         $.ajax({
+                             type: 'POST',
+                             contentType: "application/json; charset=utf-8",
+                             url: 'WebService1.asmx/instno',
+                             data: JSON.stringify(ID2),
+                             datatype: 'json',
+                             success: function (response) {
+                                 console.log(response.d);
+                                 if (response.d == 'No Data' || response.d =='') {
+                                     $('#instid').val(parseInt(data["installmentno"]) + 1);
+                                     instno = parseInt($('#instid').val());
+                                 }
+                                 else {
+                                    
+                                     $('#instid').val(parseInt(response.d) + 1);
+                                     instno = parseInt($('#instid').val());
+                                 }
+                             },
+                             error: function (err) {
+                                 console.log(JSON.stringify(err.d));
+                             }
+                         })
+                         test_skill();    
+                         $("#recvid").val(1000);
+                         $("#addrid").val(data["Address"]);
+                         $("#status2").val("Cash");
+                         $("#cgstid").val("0.00");
+                         $("#sgstid").val("0.00");
+                     }
+                 },
+                 error: function(err){
+                     console.log(JSON.stringify(err.d));
+                 }
+             });
+         });
+         $("#Amountid").change(function () {
+             var a = $("#Amountid").val();
+             $("#recvid").val(a);
+             var b = parseInt(a);
+             var c = b / 1000;
+             var d = "" + instno;
+             for (var i = 1; i < c; i++)
+             {
+                 d = d + "," + (instno+i);
+             }
+             test_skill();
+             $("#instid").val(d);
+         });
+         $(".statusid").keypress(function (e)
+         {
+             if (e.which == 32)
+             {
+                 switch(status)
+                 {
+                     case 1:
+                         $(".statusid").val("Cash");
+                         status++;
+                         break;
+                     case 2:
+                         $(".statusid").val("Cheque");
+                         status++;
+                         break;
+                     case 3:
+                         $(".statusid").val("Card");
+                         status=1;
+                         break;
+                 }
+             }
+         });
+         $("#addbut").click(function () {
+             date2.getdate = output;
+             date2.Rno = $("#Rno").val();
+             date2.Gid=$("#GID").val();
+             date2.Name = $("#nameid").val();
+             date2.Inst = $("#instid").val().substring($("#instid").val().lastIndexOf(',')+1);
+             date2.amt = $("#Amountid").val();
+             date2.RSGST =$("#sgstid").val();
+             date2.RCGST = $("#cgstid").val();
+             date2.RIGST = 0;
+             date2.RRAMT = $("#Amountid").val();
+             date2.Status = $(".statusid").val();
+             console.log(date2);
+             $.ajax({
+                 type: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 url: 'WebService1.asmx/addentry',
+                 data: JSON.stringify(date2),
+                 datatype: 'json',
+                 success: function (response) {
+                     if (response.d == 'Record Inserted') {
+                         
+                         alert(response.d);
+                         $("#Rno").val(parseInt(date2.Rno)+1);
+                     }
+                     else {
+                         console.log(response.d);
+                     }
+                 },
+                 error: function (err) {
+                     console.log(JSON.stringify(err.d));
+                 }
+             });
+             console.log("yes");
+             var ID = new Object;
+             var gid = $('#GID').val();
+             ID.gid = gid;
+             $.ajax({
+                 type: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 url: 'WebService1.asmx/exceldata',
+                 data: JSON.stringify(ID),
+                 datatype: 'json',
+                 success: function (response) {
+                     if (response.d != 'No R.No') {
+                         var data = JSON.parse(response.d);
+                         $('#nameid').val(data["Name"]);
+                         $('#memberid').val(data["Member_No"]);
+                         $('#groupnameid').html("");
+                         $('<option>' + data["GroupName"] + "</option>").appendTo("#groupnameid");
+                         $('#Amountid').val(1000);
+                         var ID2 = new Object;
+                         ID2.gid = $('#GID').val();
+                         ID2.getdate = output;
+                         $.ajax({
+                             type: 'POST',
+                             contentType: "application/json; charset=utf-8",
+                             url: 'WebService1.asmx/instno',
+                             data: JSON.stringify(ID2),
+                             datatype: 'json',
+                             success: function (response) {
+                                 console.log(response.d);
+                                 if (response.d != 'No Data' || response.d != '') {
+                                     $('#instid').val(parseInt(response.d) + 1);
+                                     instno = parseInt($('#instid').val());
+                                 }
+                                 else {
+                                     $('#instid').val(parseInt(data["installmentno"]) + 1);
+                                     instno = parseInt($('#instid').val());
+                                 }
+                             },
+                             error: function (err) {
+                                 console.log(JSON.stringify(err.d));
+                             }
+                         })
+                         test_skill();
+                         $("#recvid").val(1000);
+                         $("#addrid").val(data["Address"]);
+                         $("#status2").val("Cash");
+                         $("#cgstid").val("0.00");
+                         $("#sgstid").val("0.00");
+                     }
+                 },
+                 error: function (err) {
+                     console.log(JSON.stringify(err.d));
+                 }
+             });    
+         });
+         $("#delbut").click(function () {
+             date2.getdate = output;
+             date2.Rno = parseInt($("#Rno").val())-1;
+             date2.Gid = $("#GID").val();
+             date2.Name = $("#nameid").val();
+             date2.Inst = $("#instid").val().substring($("#instid").val().lastIndexOf(',') + 1);
+             date2.amt = $("#Amountid").val();
+             date2.RSGST = $("#sgstid").val();
+             date2.RCGST = $("#cgstid").val();
+             date2.RIGST = 0;
+             date2.RRAMT = $("#Amountid").val();
+             date2.Status = $(".statusid").val();
+             console.log(date2);
+             $.ajax({
+                 type: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 url: 'WebService1.asmx/delentry',
+                 data: JSON.stringify(date2),
+                 datatype: 'json',
+                 success: function (response) {
+                     if (response.d == 'No Data' || response.d=='0') {
+                         alert("Record is not Deleted");
+                     }
+                     else {
+                         alert(response.d);
+                     }
+                 },
+                 error: function (err) {
+                     console.log(JSON.stringify(err.d));
+                 }
+             });
+         })
+         $("#pribut").click(function () {
+        
+             var ID=new Object();
+             var gid = $('#GID').val();
+             ID.gid = gid;
+             $("#ib").html("");
+             ID.getdate = output;
+             $.ajax({
+                 type: 'POST',
+                 contentType: "application/json; charset=utf-8",
+                 url: 'WebService1.asmx/exceldata2',
+                 data: JSON.stringify(ID),
+                 datatype: 'json',
+                 success: function (response) {
+                     console.log(response.d);
+                     if (response.d != 'No R.No') {
+                         var data = JSON.parse(response.d);
+                         for (var i = 0; i < data.length; i++)
+                             $("<tr id=tr" + i + "><td>" + data[i]['Rno'] + "</td><td>" + output+ "</td><td>"+data[i]["installmentno"] + "</td><td>"+data[i]["Amount"]+"</td><td>0.00</td><td>0.00</td><td>0.00</td><td>"+data[i]["status"]+"</td></tr>").appendTo("#ib");
+                     }
+                    
+                     },
+                 error: function (err) {
+                     console.log(JSON.stringify(err.d));
+                 }
+             });
+         });
+     });
+ </script>
+</body>
+</html>

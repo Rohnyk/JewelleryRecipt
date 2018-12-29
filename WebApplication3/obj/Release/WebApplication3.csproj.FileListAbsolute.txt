@@ -1,0 +1,7 @@
+D:\VC#\WebApplication3\WebApplication3\bin\WebApplication3.dll.config
+D:\VC#\WebApplication3\WebApplication3\bin\WebApplication3.dll
+D:\VC#\WebApplication3\WebApplication3\bin\WebApplication3.pdb
+D:\VC#\WebApplication3\WebApplication3\obj\Release\WebApplication3.csproj.ResolveComReference.cache
+D:\VC#\WebApplication3\WebApplication3\obj\Release\WebApplication3.csproj.CoreCompileInputs.cache
+D:\VC#\WebApplication3\WebApplication3\obj\Release\WebApplication3.dll
+D:\VC#\WebApplication3\WebApplication3\obj\Release\WebApplication3.pdb

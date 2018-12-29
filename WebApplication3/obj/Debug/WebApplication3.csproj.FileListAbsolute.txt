@@ -1,0 +1,11 @@
+D:\5th sem\LAB -DBS\ORDER\WebApplication3\WebApplication3\bin\WebApplication3.dll
+D:\5th sem\LAB -DBS\ORDER\WebApplication3\WebApplication3\bin\WebApplication3.pdb
+D:\5th sem\LAB -DBS\ORDER\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csprojResolveAssemblyReference.cache
+D:\5th sem\LAB -DBS\ORDER\WebApplication3\WebApplication3\obj\Debug\WebApplication3.dll
+D:\5th sem\LAB -DBS\ORDER\WebApplication3\WebApplication3\obj\Debug\WebApplication3.pdb
+D:\VC#\WebApplication3\WebApplication3\bin\WebApplication3.dll
+D:\VC#\WebApplication3\WebApplication3\bin\WebApplication3.pdb
+D:\VC#\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csprojResolveAssemblyReference.cache
+D:\VC#\WebApplication3\WebApplication3\obj\Debug\WebApplication3.dll
+D:\VC#\WebApplication3\WebApplication3\obj\Debug\WebApplication3.pdb
+D:\VC#\WebApplication3\WebApplication3\obj\Debug\WebApplication3.csproj.ResolveComReference.cache

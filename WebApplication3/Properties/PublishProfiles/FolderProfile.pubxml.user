@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\www\JewelleryRecipt</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="0011311D.xls">
+      <publishTime>12/07/2018 12:42:22</publishTime>
+    </File>
+    <File Include="abstract-background-beautiful-1435752.jpg">
+      <publishTime>12/03/2018 11:32:28</publishTime>
+    </File>
+    <File Include="abstract-background-blue-311039.jpg">
+      <publishTime>12/03/2018 11:40:26</publishTime>
+    </File>
+    <File Include="artificial-background-close-up-958168.jpg">
+      <publishTime>12/03/2018 11:52:36</publishTime>
+    </File>
+    <File Include="bin/WebApplication3.dll">
+      <publishTime>12/28/2018 11:15:12</publishTime>
+    </File>
+    <File Include="bin/WebApplication3.pdb">
+      <publishTime>12/28/2018 11:15:12</publishTime>
+    </File>
+    <File Include="Book1.xlsx">
+      <publishTime>12/06/2018 19:43:40</publishTime>
+    </File>
+    <File Include="download.jpg">
+      <publishTime>12/01/2018 17:41:00</publishTime>
+    </File>
+    <File Include="HtmlPage1.html">
+      <publishTime>12/12/2018 12:43:08</publishTime>
+    </File>
+    <File Include="JavaScript1.js">
+      <publishTime>12/06/2018 15:59:04</publishTime>
+    </File>
+    <File Include="StyleSheet1.css">
+      <publishTime>12/06/2018 20:17:26</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/28/2018 11:15:15</publishTime>
+    </File>
+    <File Include="WebForm1.aspx">
+      <publishTime>12/04/2018 12:24:04</publishTime>
+    </File>
+    <File Include="WebService1.asmx">
+      <publishTime>12/03/2018 12:49:50</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
